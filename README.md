@@ -1,0 +1,2 @@
+# pryt-app
+pariyatti app
