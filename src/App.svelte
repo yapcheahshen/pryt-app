@@ -1,34 +1,33 @@
 <script>
 	import { onMount } from "svelte";
-	import equipHTML from './equiphtml'
-	export let xml;
+	import {equipHTML,getCursorWord} from 'kaigua'
+	import CPEmbedded from './controlpanel-embed.svelte';
+	import CP from './controlpanel.svelte'
+	export let embedded=false;
+	import {default_onclick} from './click'
+	import ParaMenu from './paramenu.svelte'
+	const toggleMenu=target=>{
+		if (target.childElementCount==0) {
+			new ParaMenu({target ,props: 
+				{paranum: target.attributes.name.value}
+			});
+		} else {
+			target.removeChild(target.children[0])
+		}
+	}
+	const renderAname=()=>{
+		const anames=document.getElementsByTagName('A');
+		for (let i=0;i<anames.length;i++){
+			if (anames[i].attributes.bookmark) {
+				anames[i].style='color:blue';
+			}
+		}
+	}
 
+	const ControlPanel = embedded?CPEmbedded:CP;
 	onMount(()=>{
-		equipHTML();
+		equipHTML(default_onclick);
 	})
 </script>
 
-<main>
-	<h1>Pariyatti reader</h1>
-</main>
-
-<style>
-	main {
-		text-align: center;
-		max-width: 140px;
-		margin: 0 auto;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 1em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
-</style>
+	<svelte:component this={ControlPanel} />

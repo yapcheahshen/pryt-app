@@ -1,28 +1,27 @@
 import App from './App.svelte';
-
+import {trimDocument} from 'kaigua';
 let target=document.querySelector("#svelteApp");
-const xml=document.querySelector('xml');
+const htll=document.querySelector('htll');
+
 
 if (!target) {
-	
-	if (xml) {
+	if (htll) {
 		target=document.createElement('div');
 		target.id='svelteApp';
-		xml.insertAdjacentElement('beforebegin',target);
+		htll.insertAdjacentElement('beforebegin',target);
 	} else {
-		console.error("must have <xml> as root node inside <body>");
+		console.error("must have <htll> as root node inside <body>");
 	}
 }
 
 if (target) {
+	const hash=window.location.hash.substr(1);
+	if (hash) trimDocument(hash);
+	const embedded=window.location.search.indexOf('embed')>-1;
+	
 	setTimeout(()=>{
-		const app = new App({
-			target,
-			props: {
-				xml
-			}
-		});
-	})	
+		const app = new App({target,props:{embedded}});
+	})
 }
 
 
