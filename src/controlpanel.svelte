@@ -19,6 +19,6 @@ const toggleExpand=()=>{
 <style>
     .btnmenu {cursor:pointer;position:fixed;top:0px;right:0px}
     .btnmenu:hover{color:brown}
-    .menu {position:fixed;background:palegoldenrod;
+    .menu {position:fixed;
     border-radius: 0.5em;opacity: 80%;z-index: 10;margin-top:1.5em;right:0px}
 </style>

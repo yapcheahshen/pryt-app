@@ -1,10 +1,10 @@
 import App from './App.svelte';
 import {trimDocument} from 'kaigua';
 let target=document.querySelector("#svelteApp");
-const htll=document.querySelector('htll');
+const htll=document.querySelector('htll')||document.querySelector('xml');
 
 
-if (!target) {
+if (!target) { 
 	if (htll) {
 		target=document.createElement('div');
 		target.id='svelteApp';

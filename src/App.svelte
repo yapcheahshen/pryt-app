@@ -1,11 +1,15 @@
 <script>
 	import { onMount } from "svelte";
-	import {equipHTML,getCursorWord} from 'kaigua'
+	import {equipHTML} from 'kaigua'
 	import CPEmbedded from './controlpanel-embed.svelte';
 	import CP from './controlpanel.svelte'
 	export let embedded=false;
 	import {default_onclick} from './click'
 	import ParaMenu from './paramenu.svelte'
+	import {scrolled} from './store.js';
+	const default_onscroll=()=>{
+		scrolled.set( window.scrollY );
+	}
 	const toggleMenu=target=>{
 		if (target.childElementCount==0) {
 			new ParaMenu({target ,props: 
@@ -26,7 +30,7 @@
 
 	const ControlPanel = embedded?CPEmbedded:CP;
 	onMount(()=>{
-		equipHTML(default_onclick);
+		equipHTML({onclick:default_onclick,onscroll:default_onscroll});
 	})
 </script>
 
